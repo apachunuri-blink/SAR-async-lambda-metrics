@@ -10,9 +10,9 @@ Metadata:
     LicenseUrl: LICENSE
     ReadmeUrl: README.md
     Labels: ['lambda', 'metrics', 'cloudwatch', 'monitoring', 'devops']
-    HomePageUrl: https://github.com/lumigo/SAR-async-lambda-metrics
+    HomePageUrl: https://github.com/apachunuri-blink/SAR-async-lambda-metrics
     SemanticVersion: 1.7.0
-    SourceCodeUrl: https://github.com/lumigo/SAR-async-lambda-metrics
+    SourceCodeUrl: https://github.com/apachunuri-blink/SAR-async-lambda-metrics
 
 Parameters:
   EventSourceType:
