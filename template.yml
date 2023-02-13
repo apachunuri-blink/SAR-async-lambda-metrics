@@ -25,7 +25,7 @@ Parameters:
       Other event sources are not supported (yet).
     AllowedValues:
       - 'Lambda'
-      - 'Kinesis'  
+      - 'Kinesis'
   TimeoutSeconds:
     Type: Number
     Default: 30
@@ -37,13 +37,13 @@ Parameters:
     Type: String
     Default: ''
     Description: >
-      (optional) Only relevant to the Kinesis event source type. The ARN to the Kinesis stream to 
+      (optional) Only relevant to the Kinesis event source type. The ARN to the Kinesis stream to
       subscribe the function to.
   KinesisStreamBatchSize:
     Type: Number
     Default: 100
     Description: >
-      (optional) Only relevant to the Kinesis event source type. The batch size to use for the 
+      (optional) Only relevant to the Kinesis event source type. The batch size to use for the
       subscription.
   RecordLambdaUsageMetrics:
     Type: String
@@ -52,7 +52,7 @@ Parameters:
       - "true"
       - "false"
     Description: >
-      (optional) Whether to collect Lambda usage metrics (i.e. billed duration, memory size, 
+      (optional) Whether to collect Lambda usage metrics (i.e. billed duration, memory size,
       max memory used) from the logs and turn them into metrics.
       Allowed values are "true" or "false".
   RecordLambdaCostMetric:
@@ -81,7 +81,7 @@ Conditions:
 Globals:
   Function:
     Timeout: !Ref TimeoutSeconds
-    Runtime: nodejs10.x
+    Runtime: nodejs16.x
     MemorySize: 128
     Environment:
       Variables:
@@ -100,7 +100,7 @@ Resources:
             Effect: Allow
             Action: cloudwatch:PutMetricData
             Resource: "*"
-    
+
   ConvertLambdaLogGroup:
     Type: AWS::Logs::LogGroup
     Condition: IsLambda
@@ -134,18 +134,18 @@ Resources:
 Outputs:
   ConvertLambdaFunctionName:
     Description: Name of the Lambda function name
-    Value: 
+    Value:
       !If [
-        IsLambda, 
-        !Ref ConvertLambda, 
+        IsLambda,
+        !Ref ConvertLambda,
         !Ref ConvertKinesis
       ]
 
   ConvertLambdaFunctionArn:
     Description: ARN of the Lambda function name
-    Value: 
+    Value:
       !If [
-        IsLambda, 
-        !GetAtt ConvertLambda.Arn, 
+        IsLambda,
+        !GetAtt ConvertLambda.Arn,
         !GetAtt ConvertKinesis.Arn
       ]
